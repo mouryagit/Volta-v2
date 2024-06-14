@@ -1,4 +1,4 @@
-package com.volta.voltav2.filter;
+package com.grs.filter;
 
 public class JwtRequestFilter {
 }

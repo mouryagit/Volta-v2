@@ -1,7 +1,7 @@
-package com.volta.voltav2.controller;
+package com.grs.controller;
 
-import com.volta.voltav2.model.User;
-import com.volta.voltav2.repository.UserRepository;
+import com.grs.model.User;
+import com.grs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +14,11 @@ public class loginController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/test")
-    public String test(){
-        return "Test Dataaaaaaa";
 
-    }
+
+
     @GetMapping("/getCurrentUser")
      public List<User> getCurrentUser(){
-        System.out.println("11111111111111111111111111 tyrying to getdata from db");
         return userRepository.findAll();
     }
 

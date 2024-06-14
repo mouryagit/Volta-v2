@@ -1,4 +1,4 @@
-package com.volta.voltav2.model;
+package com.grs.model;
 
 
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
-package com.volta.voltav2.service;
+package com.grs.service;
 
-import com.volta.voltav2.model.User;
-import com.volta.voltav2.repository.UserRepository;
+import com.grs.model.User;
+import com.grs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,29 +1,25 @@
-package com.volta.voltav2.config;
+package com.grs.config;
 
-import com.volta.voltav2.filter.JwtRequestFilter;
-import com.volta.voltav2.repository.UserRepository;
-import com.volta.voltav2.service.MyUserDetailService;
+import com.grs.filter.JwtRequestFilter;
+import com.grs.repository.UserRepository;
+import com.grs.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.util.AbstractUriTemplateHandler;
-
-import java.awt.image.BandCombineOp;
-import java.net.Authenticator;
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
 
+
+    @Autowired
     private JwtRequestFilter jwtRequestFilter;
+
+
 
     private MyUserDetailService myUserDetailService;
 
@@ -35,5 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private PasswordEncoder passwordEncoder() {
        return new BCryptPasswordEncoder();
+    }
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+      //  http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 }
